@@ -1,14 +1,13 @@
-package template
+package ddnss
 
 import (
 	"github.com/caddyserver/caddy/v2"
 	"github.com/caddyserver/caddy/v2/caddyconfig/caddyfile"
-
-	libdnstemplate "github.com/libdns/ddnss"
+	"github.com/libdns/ddnss"
 )
 
 // Provider lets Caddy read and manipulate DNS records hosted by this DNS provider.
-type Provider struct{ *libdnstemplate.Provider }
+type Provider struct{ *ddnss.Provider }
 
 func init() {
 	caddy.RegisterModule(Provider{})
@@ -18,7 +17,7 @@ func init() {
 func (Provider) CaddyModule() caddy.ModuleInfo {
 	return caddy.ModuleInfo{
 		ID:  "dns.providers.ddnss",
-		New: func() caddy.Module { return &Provider{new(libdnstemplate.Provider)} },
+		New: func() caddy.Module { return &Provider{new(ddnss.Provider)} },
 	}
 }
 
